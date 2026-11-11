@@ -75,8 +75,8 @@ def _finish_if_requested(
 
 
 def line_plot(
-    x: Sequence[float],
     y: Sequence[float],
+    x: Sequence[float] = None,
     title: Optional[str] = None,
     xlabel: Optional[str] = None,
     ylabel: Optional[str] = None,
@@ -94,6 +94,8 @@ def line_plot(
     yscale: Scale = None,
 ) -> Figure:
     """Draw a line on ax (or a new figure), and return the figure."""
+    if x is None:
+        x = range(1, y.value.size + 1)
     x_values, y_values = _data(x, y)
     fig, ax = _axes(ax, figsize)
     ax.plot(x_values, y_values, label=label, color=color, marker=marker, linestyle=linestyle)
